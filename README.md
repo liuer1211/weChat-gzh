@@ -6,8 +6,11 @@
         git remote add origin git@github.com:liuer1211/weChat-gzh.git
         git push -u origin master
     2.下载
+        git clone git@github.com:liuer1211/weChat-gzh.git
+        npm install
+        进入运行..._>test1>node app.js
         
-#微信公众号开发准备
+## 微信公众号开发准备
     1.申请微信公众号
     2.开通测试号
     3.ngrok，将本地服务转义成外网可以访问的网址
