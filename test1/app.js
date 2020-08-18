@@ -5,7 +5,7 @@ const sha1 = require('sha1');
 // 创建APP应用
 const app = express();
 
-//定义配置对象
+//定义配置对象  这些是微信公众号里的，自己申请
 const config = {
     token: 'liuer1211',
     appID: 'wx872e59781193d94e',
