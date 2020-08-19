@@ -50,18 +50,26 @@ class WeChat {
         * request 库
         * request-promise-native 库,返回值promise对象
         * */
-        rp({method: 'GET', url,json: true})
-            .then(res => {
-                console.log(res)
-                /*{ access_token:
-                '36_A7Z1pTvT6Nq8WT_XmMWyRnWghGxCdbLlYFBOnih30tDP2nuwYhWiolxrNvPoJrwt0NvyjB9YrIRBTVir5EVBLd3-umPerGUrTWeXlJ2C3BXJwLQd2_k4ztAbZFlN1u1LyKmSCuEHsnor3lNqPZAgAIAJTU',
-                expires_in: 7200 }
-                */
-
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        return new Promise((resolve, reject) => {
+            rp({method: 'GET', url,json: true})
+                .then(res => {
+                    console.log(res)
+                    /*{ access_token:
+                    '36_A7Z1pTvT6Nq8WT_XmMWyRnWghGxCdbLlYFBOnih30tDP2nuwYhWiolxrNvPoJrwt0NvyjB9YrIRBTVir5EVBLd3-umPerGUrTWeXlJ2C3BXJwLQd2_k4ztAbZFlN1u1LyKmSCuEHsnor3lNqPZAgAIAJTU',
+                    expires_in: 7200 }
+                    */
+                    // 设置access_token的过期问题
+                    res.expires_in = Date.now() + (res.expires_in - 300) * 1000
+                    // 这里return 是 .then的返回；想要变成getAccessToken方法的返回，new一个promise
+                    // 将promise对象改成成功的状态
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    // 失败
+                    reject('getAccessToken方法异常',err)
+                })
+        })
     }
 }
 
