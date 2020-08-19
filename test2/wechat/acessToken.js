@@ -5,7 +5,9 @@
            3.接口权限 2000次
     https请求方式: GET
     https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
-    正常返回：{"access_token":"ACCESS_TOKEN","expires_in":7200}
+    正常返回：{ access_token:
+                '36_A7Z1pTvT6Nq8WT_XmMWyRnWghGxCdbLlYFBOnih30tDP2nuwYhWiolxrNvPoJrwt0NvyjB9YrIRBTVir5EVBLd3-umPerGUrTWeXlJ2C3BXJwLQd2_k4ztAbZFlN1u1LyKmSCuEHsnor3lNqPZAgAIAJTU',
+                expires_in: 7200 }
     失败：{ errcode: 40013,errmsg: 'invalid appid rid: 5f3be1bf-3506e52e-4207c7e6' }
     错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
 
@@ -22,7 +24,13 @@
 
 */
 // 引入模块
-const {appID,appsecret} = require('../config')
+// const {appID,appsecret} = require('../config')
+const config = {
+    token: 'liuer1211',
+    appID: 'wx872e59781193d94e',
+    appsecret: '4f48edb38a63b5283bbf158e58defe9b'
+}
+
 // 只需要引入request-promise-native
 const rp = require('request-promise-native')
 
@@ -35,9 +43,8 @@ class WeChat {
      *  用来获取access_token
      * */
     getAccessToken () {
-        console.log(appID,appsecret)
         // 定义请求地址
-        const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appID}&secret=${appsecret}`
+        const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${config.appID}&secret=${config.appsecret}`
         // 发请求
         /*
         * request 库
@@ -46,6 +53,11 @@ class WeChat {
         rp({method: 'GET', url,json: true})
             .then(res => {
                 console.log(res)
+                /*{ access_token:
+                '36_A7Z1pTvT6Nq8WT_XmMWyRnWghGxCdbLlYFBOnih30tDP2nuwYhWiolxrNvPoJrwt0NvyjB9YrIRBTVir5EVBLd3-umPerGUrTWeXlJ2C3BXJwLQd2_k4ztAbZFlN1u1LyKmSCuEHsnor3lNqPZAgAIAJTU',
+                expires_in: 7200 }
+                */
+
             })
             .catch(err => {
                 console.log(err)

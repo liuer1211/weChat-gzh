@@ -7,7 +7,7 @@
         git push -u origin master
     2.下载
         git clone git@github.com:liuer1211/weChat-gzh.git
-        npm install
+        npm install 或 cnpm install 或 yarn install
         进入运行..._>test1>node app.js
         
 ## 微信公众号开发准备
